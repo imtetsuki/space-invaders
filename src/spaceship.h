@@ -1,0 +1,8 @@
+//
+// Created by PHAM Hoang Lan on 23/10/2021.
+//
+
+#ifndef SPACE_INVADERS_SPACESHIP_H
+#define SPACE_INVADERS_SPACESHIP_H
+
+#endif //SPACE_INVADERS_SPACESHIP_H
