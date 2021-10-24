@@ -86,3 +86,6 @@ cmake-build-debug/space_invaders
 cmake-build-debug/space_invaders.cbp
 cmake-build-debug/Testing/Temporary/LastTest.log
 CMakeLists.txt
+src/Test 2
+src/test
+Space_Invaders

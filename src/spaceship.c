@@ -1,4 +1,4 @@
-#include "spaceship.h"
+#include "../headers/spaceship.h"
 #include <stdio.h>
 
 

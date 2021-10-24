@@ -24,7 +24,7 @@ char key_pressed()
 }
 
 void printSpaceship(int x, int y, FILE *fp){
-    system("clear");
+    //system("clear");
     char line[20];
     while(fgets(line,20,fp)){
         printf("\033[%d;%dH",y,x);
@@ -35,25 +35,45 @@ void printSpaceship(int x, int y, FILE *fp){
     rewind(fp);
 }
 
+void removeSpaceship(int x, int y, FILE *fp){
+    char line[20];
+    while(fgets(line,20,fp)){
+        printf("\033[%d;%dH",y,x);
+        y++;
+        printf("%s","             ");
+    }
+    printf("\n");
+    rewind(fp);
+}
+
+void fire(int x, int y){
+    printf("\033[%d;%dH",--y,x+3);
+    printf("|");
+}
+
 int movement(int *x, int *y, FILE *fp){
     char key = key_pressed();
     switch (key) {
         case 'z':
+            removeSpaceship(*x,*y,fp);
             --(*y);
             break;
         case 'q':
+            removeSpaceship(*x,*y,fp);
             --(*x);
             break;
         case 's':
+            removeSpaceship(*x,*y,fp);
             ++(*y);
             break;
         case 'd':
+            removeSpaceship(*x,*y,fp);
             ++(*x);
             break;
         case 'p':
             return EXIT_FAILURE;
         case ' ':
-            printf("pioupiou");
+            fire(*x, *y);
             break;
         /*default:
             return EXIT_SUCCESS;*/
@@ -63,11 +83,12 @@ int movement(int *x, int *y, FILE *fp){
 }
 
 int main(){
-
+    initscr();
+    curs_set(0);
     int out = 0;
     int x = 6;
     int y = 50;
-    FILE *spaceship = fopen("../Assets/bg1_nord.txt", "r");
+    FILE *spaceship = fopen("Assets/bg1_nord.txt", "r");
 
     while ( out == 0){
         out = movement(&x,&y,spaceship);
