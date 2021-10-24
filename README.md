@@ -11,32 +11,19 @@ Une fois le projet lancé, bien lire et faire ce qu'il est demandé par rapport 
 
 ### Pré-requis
 
-- **JAVA** d'installer sur sa machine
+- **C** d'installer sur sa machine
+- Machine sous **LINUX**
 
 ## Démarrage
 
-Double-click sur le fichier "**Launcher.bat**" et le projet sera lancé.
-
-**Si** le projet ne ce lance pas ou que le fichier "**Launcher.bat**" n'existe pas alors :
-
- * Placez vous dans le dossier source, copier le chemin.
- * Ouvrez votre terminal de commande, rentrer ceci : *cd "coller le chemin que vous avez copier auparavant"*
- * Puis rentrer pour compiler le projet : *javac "le chemin vers le fichier **Test.java** contenant le main"*
- * Et enfin pour le lancer, rentrer : *java "le chemin vers le fichier **Test** sans un .java ou un .class derriere celui ci"
 
 ## Fabriqué avec
 
-* [Intellij IDEA](https://www.jetbrains.com/fr-fr/idea/) - IDE 
-* [Eclipse](https://www.eclipse.org/) - IDE
-* [JAVA](https://www.java.com/fr/) - Langage de programmation
-* [JAVA.AWT](https://docs.oracle.com/javase/7/docs/api/java/awt/package-summary.html) - Interface Graphique
-* [JAVA.UTIL.SCANNER](https://docs.oracle.com/javase/7/docs/api/java/util/Scanner.html) - Interaction avec l'utilisateur
-* [JAVA.IO.Serializable](https://docs.oracle.com/javase/7/docs/api/java/io/Serializable.html) - Sauvegarde en Files
-* [JAVA.NIO.FILE](https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html) - Utilisation des Files
+* [Clion](https://www.jetbrains.com/fr-fr/clion/) - IDE 
+
 
 ## Auteurs
 
-* **NZABA Eric**
 * **PHAM Hoang-Lân**
 
 
