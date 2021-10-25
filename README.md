@@ -3,7 +3,7 @@
 Ce projet est basé sur le jeu <ins>**Space Invaders**</ins> qu’on peut bien sûr essayer gratuitement sur nos smartphone ou sur le **Web**.  
 Le but de ce projet qui sera la note finale du <ins>*Projet C*</ins>, est de reproduire le jeu <ins>**Space Invaders**</ins>, sans en faire une copie parfaite du jeu original, mais de le reproduire à notre façon en fonction de notre niveau en programmation dans le <ins>langage de programmation **C**</ins>.
 
-[![forthebadge](Assets/made-with-c.svg)
+[![forthebadge](Assets/made-with-c.svg)](https://forthebadge.com)
 
 ## Pour commencer
 
