@@ -13,13 +13,12 @@ Une fois le projet lancé, bien lire et faire ce qu'il est demandé par rapport 
 
 - Machine sous **LINUX**
 - **C** d'installer sur sa machine
-- Puis lancer './Space-invader'
 
 ## Démarrage
 
 - Ouvrir le terminal aller dans le dossier Space_Invaders avec la commande *cd*
-- Taper *make* dans le terminal
-- Puis le lancer avec *./Space_Invaders*
+- Taper la commande *make* dans le terminal
+- Puis le lancer avec la commande *./Space_Invaders*
 
 ## Fabriqué avec
 
