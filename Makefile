@@ -17,14 +17,14 @@ all: $(PROG)
 
 #le gcc final faut rajouter les flag de compil ici genre -lm pour le math.h
 $(PROG): $(OBJS)
-	$(LD) $(LDFLAGS) $(OBJS) -o $(PROG) -lncurses 
+	$(LD) $(LDFLAGS) $(OBJS) -o $(PROG) -lncurses
 	make clean
 
 #tu mets le .c + les fichier .h inclu dedans
-main.o: src/main.c headers/spaceship.h
+main.o: src/main.c #headers/spaceship.h
 	$(CC) $(CFLAGS) -c src/main.c
 
-spaceship.o: src/spaceship.c headers/spaceship.h
+spaceship.o: src/spaceship.c #headers/spaceship.h
 	$(CC) $(CFLAGS) -c src/spaceship.c
 
 clean:

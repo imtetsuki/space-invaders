@@ -51,6 +51,10 @@ void fire(int x, int y){
     printf("|");
 }
 
+void stock(FILE *fp){
+
+}
+
 int movement(int *x, int *y, FILE *fp){
     char key = key_pressed();
     switch (key) {
@@ -89,12 +93,17 @@ int main(){
     int x = 6;
     int y = 50;
     FILE *spaceship = fopen("Assets/bg1_nord.txt", "r");
+    FILE *alien = fopen("Assets/ennemi1_sud.txt", "r");
 
     while ( out == 0){
         out = movement(&x,&y,spaceship);
+        printSpaceship(6,20,alien);
     }
 
+
+
     fclose(spaceship);
+    fclose(alien);
     return 0;
 
 }

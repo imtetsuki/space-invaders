@@ -1,7 +1,7 @@
 #ifndef SPACE_INVADERS_SPACESHIP_H
 #define SPACE_INVADERS_SPACESHIP_H
 
-/*typedef struct
+typedef struct
 {
     char Direction ; /*N => Nord, S => Sud, E => EST, O => OUEST*/
     int PosX; /*Position courante coin gauche X du vaisseau*/
@@ -14,9 +14,10 @@
     char Couleur[30]; /*Couleur du vaisseau*/
     int Etat; /*État du vaisseau 1=> actif, 2=> en destruction, 3 => inactif*/
     int Mise_a_jour; /*utile pour la suppression du vaisseau en tenant compte d’un certain délai*/
-    struct spaceship * NXT; /*Pointeur vers un prochain vaisseau, servira pour la liste chaînée*/
-/*Vous pouvez rajouter d’autres variables si nécessaire
-}spaceship;*/
+    struct spaceshipen * NXT; /*Pointeur vers un prochain vaisseau, servira pour la liste chaînée*/
+
+//Vous pouvez rajouter d’autres variables si nécessaire
+}spaceshipen;
 
 typedef struct {
     int posX; //Position sur l'axe x du vaisseau allié
@@ -37,6 +38,6 @@ typedef struct {
     //int etat;
     int maj; // Va etre utile pour la suppression du vaisseau avec un delai
     struct alien * nxt; // Un pointeur pour une liste chainée
-}alien ;
+}alien;
 
 #endif //SPACE_INVADERS_SPACESHIP_H
