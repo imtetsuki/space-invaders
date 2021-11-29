@@ -27,7 +27,7 @@ typedef struct {
     char couleur[30]; //Couleur du vaisseau allié
     //int Etat;
     int Maj; // Va etre utile pour la suppression du vaisseau avec un delai
-}spaceship;
+}Spaceship;
 
 typedef struct {
     int posX; //Position sur l'axe x du vaisseau ennemie
@@ -38,6 +38,14 @@ typedef struct {
     //int etat;
     int maj; // Va etre utile pour la suppression du vaisseau avec un delai
     struct alien * nxt; // Un pointeur pour une liste chainée
-}alien;
+}Alien;
+
+typedef struct {
+    int posX;
+    int posY;
+    int vitesse;
+    char couleur[30];
+    int maj;
+}Laser;
 
 #endif //SPACE_INVADERS_SPACESHIP_H
