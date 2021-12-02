@@ -1,6 +1,8 @@
 #ifndef SPACE_INVADERS_SPACESHIP_H
 #define SPACE_INVADERS_SPACESHIP_H
 
+#include <stdio.h>
+
 typedef struct
 {
     char Direction ; /*N => Nord, S => Sud, E => EST, O => OUEST*/
@@ -23,10 +25,11 @@ typedef struct {
     int posX; //Position sur l'axe x du vaisseau allié
     int posY; //Position sur l'axe y du vaisseau allié
     int vie; //Nombre de point de vie restante
-    char** Carrosserie; //Affichage du vaisseau
+    char Carrosserie; //Affichage du vaisseau
     char couleur[30]; //Couleur du vaisseau allié
-    //int Etat;
-    int Maj; // Va etre utile pour la suppression du vaisseau avec un delai
+    int etat; //Va etre utile pour la suppression du vaisseau avec un delai
+    int Maj;
+    FILE* vaisseau;
 }Spaceship;
 
 typedef struct {
@@ -35,9 +38,9 @@ typedef struct {
     int vie; //Nombre de point de vie restante ( le blindage )
     char** Carrosserie; //Affichage du vaisseau
     char couleur[30]; //Couleau du vaiseau ennemie
-    //int etat;
-    int maj; // Va etre utile pour la suppression du vaisseau avec un delai
-    struct alien * nxt; // Un pointeur pour une liste chainée
+    int etat; //Va etre utile pour la suppression du vaisseau avec un delai
+    FILE* alien;
+    struct Alien *nxt;; // Un pointeur pour une liste chainée
 }Alien;
 
 typedef struct {
@@ -45,7 +48,7 @@ typedef struct {
     int posY;
     int vitesse;
     char couleur[30];
-    int maj;
+    int maj; //maj == 1, laser existe, maj == 0 existe plus
 }Laser;
 
 #endif //SPACE_INVADERS_SPACESHIP_H

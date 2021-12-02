@@ -9,6 +9,8 @@
 #include "../headers/spaceship.h"
 
 
+void printEnnemie(Alien *alien);
+
 char key_pressed()
 {
     struct termios oldterm, newterm;
@@ -60,13 +62,14 @@ void printLaser(int x, int y){
     printf("\n");
 }
 
-void createLaser(int x, int y, Laser lasers[]){
-    for(int i = 0; i < 400; i++){
+void createLaser(int x, int y, Laser *lasers){
+    int size = (int) sizeof(lasers);
+    for(int i = 0; i < size; i++){
         if(lasers[i].maj == 0){
             //lasers[i] = {x+3, --y, 1, 't', 1};
             lasers[i].posX = x+3;
             lasers[i].posY = --y;
-            lasers[i].vitesse = 1;
+            //lasers[i].vitesse = 1;
             lasers[i].maj = 1;
             printLaser(lasers[i].posX, lasers[i].posY);
             break;
@@ -74,15 +77,16 @@ void createLaser(int x, int y, Laser lasers[]){
     }
 }
 
-void movementLaser(Laser lasers[]){
-    for(int i = 0; i<400; i++){
+void movementLaser(Laser *lasers){
+    int size = (int) sizeof(lasers);
+    for(int i = 0; i<size; i++){
         if(lasers[i].maj == 1){
-            if(lasers[i].posY == -1){
+            if(lasers[i].posY == -2){
                 removeLaser(lasers[i].posX, lasers[i].posY );
                 lasers[i].maj = 0;
             }else{
                 removeLaser(lasers[i].posX, lasers[i].posY );
-                lasers[i].posY = lasers[i].posY - lasers[i].vitesse;
+                lasers[i].posY = lasers[i].posY - 1;
                 printLaser(lasers[i].posX,lasers[i].posY);
             }
         }
@@ -123,6 +127,53 @@ int movement(int *x, int *y, FILE *fp, Laser lasers[]){
     return EXIT_SUCCESS;
 }
 
+void collide(Laser lasers[]){
+
+}
+
+void createEnnemie(Alien *alien, FILE *fp){
+    int size = (int) sizeof(alien);
+    for(int i = 0; i < size; i++){
+        if(alien[0].etat == 0){
+            //lasers[i] = {x+3, --y, 1, 't', 1};
+            alien[0].posX = 1;
+            alien[0].posY = -10;
+            //lasers[i].vitesse = 1;
+            alien[0].vie = 3;
+            alien[0].etat = 1;
+            alien[0].alien = fp;
+            printEnnemie(alien);
+        }else{
+            alien[i].posX = alien[i-1].posX+7;
+            alien[i].posY = alien[i-1].posY+8;
+            alien[i].vie = 3;
+            alien[i].etat = 1;
+            alien[i].alien = fp;
+            alien[i-1].nxt = (struct Alien *) malloc(sizeof(alien[i]));
+            printEnnemie(alien);
+        }
+    }
+}
+
+void printEnnemie(Alien *alien) {
+    int size = (int) sizeof(alien);
+    for(int i = 0; i < size; i++){
+        if(alien[i].etat == 0){
+            char line[20];
+            while(fgets(line,20,alien[i].alien)){
+                int y = alien[i].posY;
+                int x = alien[i].posX;
+                printf("\033[%d;%dH",y,x);
+                y++;
+                printf("%s",line);
+            }
+            printf("\n");
+            rewind(alien[i].alien);
+        }
+    }
+}
+
+
 int main(){
     initscr();
     curs_set(0);
@@ -130,15 +181,13 @@ int main(){
     int x = 6;
     int y = 50;
 
-
-    int numlaser = 300;
-    Laser* lasers = malloc(numlaser * sizeof *lasers);
-    for(int i = 0; i<300; i++){
-        lasers[i].maj = 0;
-    }
+    Laser* lasers = malloc(1* sizeof *lasers);
+    Alien* aliens = malloc(20* sizeof *aliens);
+    //Spaceship* spaceship = malloc(1* sizeof *spaceship);
 
     FILE *spaceship = fopen("Assets/bg1_nord.txt", "r");
-    FILE *alien = fopen("Assets/ennemi1_sud.txt", "r");
+    FILE *alien = fopen("../Assets/ennemi1_sud.txt", "r");
+
     int sec = 0;
     while ( out == 0){
         out = movement(&x,&y,spaceship, lasers);
@@ -147,11 +196,9 @@ int main(){
             sec = 0;
         }
         sec++;
-        printSpaceship(6,20,alien);
+        createEnnemie(aliens,alien);
         //sleep(1);
     }
-
-
 
     fclose(spaceship);
     fclose(alien);
