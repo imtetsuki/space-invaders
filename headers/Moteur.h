@@ -12,5 +12,6 @@ void createStar(Star *stars);
 void movementStar(Star *stars);
 void printStar(int x, int y);
 void removeStar(int x,int y);
+void printBoard();
 
 #endif //SPACE_INVADERS_MOTEUR_H
