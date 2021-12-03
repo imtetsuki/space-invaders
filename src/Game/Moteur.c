@@ -33,19 +33,11 @@ char key_pressed()
 int movement(int *x, int *y, FILE *fp, Laser lasers[]){
     char key = key_pressed();
     switch (key) {
-        /*case 'z':
-            removeSpaceship(*x,*y,fp);
-            --(*y);
-            break;*/
         case 'q':
             removeSpaceship(*x,*y,fp);
             //movementLaser(lasers);
             --(*x);
             break;
-            /*case 's':
-                removeSpaceship(*x,*y,fp);
-                ++(*y);
-                break;*/
         case 'd':
             removeSpaceship(*x,*y,fp);
             //movementLaser(lasers);
@@ -81,7 +73,7 @@ void movementLaser(Laser *lasers){
 }
 
 void createStar(Star *stars){
-    for(int i = 0; i < 25; i++){
+    for(int i = 0; i<50; i++){
         if(stars[i].maj == 0){
             stars[i].posX = rand()%(50-2+1);
             stars[i].posY = rand()%(50-1);
@@ -92,7 +84,7 @@ void createStar(Star *stars){
 }
 
 void movementStar(Star *stars){
-    for(int i = 0; i<25; i++){
+    for(int i = 0; i<50; i++){
         if(stars[i].maj == 1){
             if(stars[i].posX == 120){
                 removeStar(stars[i].posX, stars[i].posY );

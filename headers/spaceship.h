@@ -21,6 +21,7 @@ typedef struct {
     char carroserie[20]; //Affichage du vaisseau
     char couleur[30]; //Couleau du vaiseau ennemie
     int etat; //Va etre utile pour la suppression du vaisseau avec un delai
+    FILE* alien;
     struct Alien *nxt;; // Un pointeur pour une liste chainée
 }Alien;
 
