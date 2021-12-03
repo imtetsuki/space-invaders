@@ -8,7 +8,7 @@ RM = rm -f
 LDLIBS =s
 
 #Les .o faut les lister ici
-OBJS = main.o spaceship.o
+OBJS =  Moteur.o Joueur.o Ennemie.o  launcher.o
 
 #le nom de ton executable
 PROG = Space_Invaders
@@ -21,11 +21,18 @@ $(PROG): $(OBJS)
 	make clean
 
 #tu mets le .c + les fichier .h inclu dedans
-main.o: src/main.c #headers/spaceship.h
-	$(CC) $(CFLAGS) -c src/main.c
 
-spaceship.o: src/spaceship.c #headers/spaceship.h
-	$(CC) $(CFLAGS) -c src/spaceship.c
+Moteur.o: src/Game/Moteur.c #headers/spaceship.h
+	$(CC) $(CFLAGS) -c src/Game/Moteur.c
+
+launcher.o: src/launcher.c #headers/spaceship.h
+	$(CC) $(CFLAGS) -c src/launcher.c
+
+Joueur.o: src/Game/Joueur.c #headers/spaceship.h
+	$(CC) $(CFLAGS) -c src/Game/Joueur.c
+
+Ennemie.o: src/Game/Ennemie.c #headers/spaceship.h
+	$(CC) $(CFLAGS) -c src/Game/Ennemie.c
 
 clean:
 	$(RM) $(OBJS)
