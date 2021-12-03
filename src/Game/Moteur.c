@@ -118,3 +118,11 @@ void removeStar(int x,int y){
     printf("%s","  ");
     printf("\n");
 }
+
+void printBoard(){
+    for (int i=0; i<150; i++){
+        for (int y=0; y<70; y++){
+            printf("1");
+        }
+    }
+}
