@@ -1,1 +1,6 @@
-CMakeLists.txt not found in C:\Users\PHAM Hoang-Lân\Documents\GitHub\space-invaders Select CMakeLists.txt
+"D:\CLion 2020.3.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "C:\Users\PHAM Hoang-Lân\Documents\GitHub\space-invaders"
+CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
+  CMake 3.20 or higher is required.  You are running version 3.17.5
+
+
+-- Configuring incomplete, errors occurred!

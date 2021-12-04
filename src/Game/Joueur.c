@@ -52,7 +52,7 @@ char* fileToCharArr(FILE *fp){
 void printSpaceship(Spaceship* ship){
     //system("clear");
     printf("\033[%d;%dH",ship->posY,ship->posX);
-    printf("%c",ship->Carrosserie);
+    printf("%s",ship->Carrosserie);
 
 }
 
