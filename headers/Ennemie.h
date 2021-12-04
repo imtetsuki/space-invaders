@@ -5,7 +5,9 @@
 #ifndef SPACE_INVADERS_ENNEMIE_H
 #define SPACE_INVADERS_ENNEMIE_H
 
-void insert(int x, int y, int vie);
+struct Alien* initAlien(int posX, int posY, int vie, char* carrosserie);
+void addlist(struct Alien* head);
+void addlistALien(struct Alien* head,struct Alien* next);
 
 
 #endif //SPACE_INVADERS_ENNEMIE_H

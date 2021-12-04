@@ -27,7 +27,7 @@ int main(){
 
     FILE *spaceship = fopen("Assets/spaceship.txt", "r");
     Spaceship *spaceship1 = createJoueur(50,40,spaceship);
-    FILE *alien = fopen("Assets/ennemi1_sud.txt", "r");
+    //FILE *alien = fopen("Assets/ennemi1_sud.txt", "r");
     createStar(stars);
 
     int sec = 0;
@@ -40,14 +40,13 @@ int main(){
             movementStar(stars);
         }
         sec++;
-        //printSpaceship(spaceship1);
-        //printSpaceship(50,10,ship->Carrosserie);
+        printSpaceship(spaceship1);
         //createEnnemie(aliens,alien);
         //sleep(1);
     }
 
     fclose(spaceship);
-    fclose(alien);
+    //fclose(alien);
     return 0;
 
 }

@@ -18,47 +18,63 @@ Spaceship* createJoueur(int x, int y, FILE *fp){
     Spaceship *spaceship;
 
     spaceship = (Spaceship*)malloc(sizeof(Spaceship));
-
-    spaceship -> Maj = 1;
     spaceship -> posX = x;
     spaceship -> posY = y;
     spaceship -> vie = 10;
-    spaceship -> Carrosserie = fileToCharArr(fp);
+    spaceship -> etat = 1;
+    spaceship -> carrosserie = fileToCharArr(fp);
 
     return spaceship;
-
 }
 
 char* fileToCharArr(FILE *fp){
-    long lSize;
-    char *buffer;
+    char *buffer = NULL;
+    size_t size = 0;
 
-    fseek( fp , 0L , SEEK_END);
-    lSize = ftell( fp );
-    rewind( fp );
+/* Get the buffer size */
+    fseek(fp, 0, SEEK_END); /* Go to end of file */
+    size = ftell(fp); /* How many bytes did we pass ? */
 
-    buffer = calloc( 1, lSize+1 );
-    if( !buffer ) fclose(fp),fputs("memory alloc fails",stderr),exit(1);
+/* Set position of stream to the beginning */
+    rewind(fp);
 
-    if( 1!=fread( buffer , lSize, 1 , fp) )
-        fclose(fp),free(buffer),fputs("entire read fails",stderr),exit(1);
+/* Allocate the buffer (no need to initialize it with calloc) */
+    buffer = malloc((size + 1) * sizeof(*buffer)); /* size + 1 byte for the \0 */
 
+/* Read the file into the buffer */
+    fread(buffer, size, 1, fp); /* Read 1 chunk of size bytes from fp into buffer */
 
+/* NULL-terminate the buffer */
+    buffer[size] = '\0';
 
-    fclose(fp);
+/* Print it ! */
     return buffer;
 }
 
 void printSpaceship(Spaceship* ship){
     //system("clear");
-    printf("\033[%d;%dH",ship->posY,ship->posX);
-    printf("%s",ship->Carrosserie);
+    //printf("\033[%d;%dH",ship->posY,ship->posX);
+    //printf("%s",ship->Carrosserie);
+    int y = ship->posY;
+    printf("\033[%d;%dH",y,ship->posX);
+    for(int i = 0; i< strlen(ship->carrosserie);i++){
+        if(ship->carrosserie[i] == '\n'){
+            printf("\033[%d;%dH",y,ship->posX);
+            y++;
+        }
+            printf("%c", ship->carrosserie[i]);
+    }
 
 }
 
 void removeSpaceship(Spaceship* ship){
-    printf("\033[%d;%dH",ship->posY,ship->posX);
-    printf("%s","             ");
+    int y = ship->posY;
+    printf("\033[%d;%dH",y,ship->posX);
+    for(int i = 0; i< 11;i++){
+        printf("\033[%d;%dH",y,ship->posX);
+        y++;
+        printf("%s", "                       ");
+    }
 }
 
 void removeLaser(int x,int y){
@@ -77,7 +93,7 @@ void createLaser(int x, int y, Laser *lasers){
     for(int i = 0; i < 25; i++){
         if(lasers[i].maj == 0){
             //lasers[i] = {x+3, --y, 1, 't', 1};
-            lasers[i].posX = x+3;
+            lasers[i].posX = x+6;
             lasers[i].posY = --y;
             //lasers[i].vitesse = 1;
             lasers[i].maj = 1;

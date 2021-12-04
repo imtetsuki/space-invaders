@@ -118,9 +118,3 @@ void removeStar(int x,int y){
     printf("%s","  ");
     printf("\n");
 }
-
-void printVoid(){
-    for (int i = 0; i < 75; ++i) {
-        printf("                                                                                                                                                          ");
-    }
-}
