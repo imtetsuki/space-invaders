@@ -14,27 +14,51 @@
 #include "../../headers/Reglage.h"
 #include "../../headers/Launcher.h"
 
-void printSpaceship(int x, int y, FILE *fp){
-    //system("clear");
-    char line[20];
-    while(fgets(line,20,fp)){
-        printf("\033[%d;%dH",y,x);
-        y++;
-        printf("%s",line);
-    }
-    printf("\n");
-    rewind(fp);
+Spaceship* createJoueur(int x, int y, FILE *fp){
+    Spaceship *spaceship;
+
+    spaceship = (Spaceship*)malloc(sizeof(Spaceship));
+
+    spaceship -> Maj = 1;
+    spaceship -> posX = x;
+    spaceship -> posY = y;
+    spaceship -> vie = 10;
+    spaceship -> Carrosserie = fileToCharArr(fp);
+
+    return spaceship;
+
 }
 
-void removeSpaceship(int x, int y, FILE *fp){
-    char line[20];
-    while(fgets(line,20,fp)){
-        printf("\033[%d;%dH",y,x);
-        y++;
-        printf("%s","             ");
-    }
-    printf("\n");
-    rewind(fp);
+char* fileToCharArr(FILE *fp){
+    long lSize;
+    char *buffer;
+
+    fseek( fp , 0L , SEEK_END);
+    lSize = ftell( fp );
+    rewind( fp );
+
+    buffer = calloc( 1, lSize+1 );
+    if( !buffer ) fclose(fp),fputs("memory alloc fails",stderr),exit(1);
+
+    if( 1!=fread( buffer , lSize, 1 , fp) )
+        fclose(fp),free(buffer),fputs("entire read fails",stderr),exit(1);
+
+
+
+    fclose(fp);
+    return buffer;
+}
+
+void printSpaceship(Spaceship* ship){
+    //system("clear");
+    printf("\033[%d;%dH",ship->posY,ship->posX);
+    printf("%c",ship->Carrosserie);
+
+}
+
+void removeSpaceship(Spaceship* ship){
+    printf("\033[%d;%dH",ship->posY,ship->posX);
+    printf("%s","             ");
 }
 
 void removeLaser(int x,int y){
@@ -45,7 +69,7 @@ void removeLaser(int x,int y){
 
 void printLaser(int x, int y){
     printf("\033[%d;%dH",y,x);
-    printf("|");
+    printf("||");
     printf("\n");
 }
 

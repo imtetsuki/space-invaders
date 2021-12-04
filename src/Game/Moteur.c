@@ -30,7 +30,7 @@ char key_pressed()
     return result;
 }
 
-int movement(int *x, int *y, FILE *fp, Laser lasers[]){
+int movement(Spaceship *ship, Laser lasers[]){
     char key = key_pressed();
     switch (key) {
         /*case 'z':
@@ -38,29 +38,29 @@ int movement(int *x, int *y, FILE *fp, Laser lasers[]){
             --(*y);
             break;*/
         case 'q':
-            removeSpaceship(*x,*y,fp);
+            removeSpaceship(ship);
             //movementLaser(lasers);
-            --(*x);
+            --(ship->posX);
             break;
             /*case 's':
                 removeSpaceship(*x,*y,fp);
                 ++(*y);
                 break;*/
         case 'd':
-            removeSpaceship(*x,*y,fp);
+            removeSpaceship(ship);
             //movementLaser(lasers);
-            ++(*x);
+            ++(ship->posX);
             break;
         case 'p':
             return EXIT_FAILURE;
         case ' ':
-            createLaser(*x, *y, lasers);
+            createLaser(ship->posX, ship->posY, lasers);
             break;
             /*default:
                 return EXIT_SUCCESS;*/
     }
 
-    printSpaceship(*x,*y,fp);
+    printSpaceship(ship);
     return EXIT_SUCCESS;
 }
 
@@ -117,4 +117,10 @@ void removeStar(int x,int y){
     printf("\033[%d;%dH",y,x);
     printf("%s","  ");
     printf("\n");
+}
+
+void printVoid(){
+    for (int i = 0; i < 75; ++i) {
+        printf("                                                                                                                                                          ");
+    }
 }

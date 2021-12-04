@@ -7,11 +7,10 @@ typedef struct {
     int posX; //Position sur l'axe x du vaisseau allié
     int posY; //Position sur l'axe y du vaisseau allié
     int vie; //Nombre de point de vie restante
-    char Carrosserie; //Affichage du vaisseau
+    char *Carrosserie; //Affichage du vaisseau
     char couleur[30]; //Couleur du vaisseau allié
     int etat; //Va etre utile pour la suppression du vaisseau avec un delai
     int Maj;
-    FILE* vaisseau;
 }Spaceship;
 
 typedef struct {

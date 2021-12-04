@@ -5,8 +5,10 @@
 #ifndef SPACE_INVADERS_JOUEUR_H
 #define SPACE_INVADERS_JOUEUR_H
 
-void printSpaceship(int x, int y, FILE *fp);
-void removeSpaceship(int x, int y, FILE *fp);
+Spaceship* createJoueur(int x, int y, FILE *fp);
+char* fileToCharArr(FILE *fp);
+void printSpaceship(Spaceship* ship);
+void removeSpaceship(Spaceship* ship);
 void removeLaser(int x,int y);
 void printLaser(int x, int y);
 void createLaser(int x, int y, Laser *lasers);

@@ -18,19 +18,21 @@ int main(){
     initscr();
     curs_set(0);
     int out = 0;
-    int x = 50;
-    int y = 40;
+    //int x = 50;
+    //int y = 40;
 
     Laser* lasers = malloc(200* sizeof *lasers);
     Star* stars = malloc(200* sizeof *stars);
 
+
     FILE *spaceship = fopen("Assets/spaceship.txt", "r");
+    Spaceship *spaceship1 = createJoueur(50,40,spaceship);
     FILE *alien = fopen("Assets/ennemi1_sud.txt", "r");
     createStar(stars);
 
     int sec = 0;
     while ( out == 0){
-        out = movement(&x,&y,spaceship, lasers);
+        out = movement(spaceship1, lasers);
         if(sec == 1500) {
             movementLaser(lasers);
             sec = 0;
@@ -38,7 +40,8 @@ int main(){
             movementStar(stars);
         }
         sec++;
-        printSpaceship(50,10,alien);
+        //printSpaceship(spaceship1);
+        //printSpaceship(50,10,ship->Carrosserie);
         //createEnnemie(aliens,alien);
         //sleep(1);
     }

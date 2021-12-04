@@ -6,7 +6,7 @@
 #define SPACE_INVADERS_MOTEUR_H
 
 char key_pressed();
-int movement(int *x, int *y, FILE *fp, Laser lasers[]);
+int movement(Spaceship *ship, Laser lasers[]);
 void movementLaser(Laser *lasers);
 void createStar(Star *stars);
 void movementStar(Star *stars);
