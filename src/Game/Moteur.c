@@ -30,37 +30,29 @@ char key_pressed()
     return result;
 }
 
-int movement(Spaceship *ship, Laser lasers[]){
+int movement(int *x, int *y, FILE *fp, Laser lasers[]){
     char key = key_pressed();
     switch (key) {
-        /*case 'z':
-            removeSpaceship(*x,*y,fp);
-            --(*y);
-            break;*/
         case 'q':
-            removeSpaceship(ship);
+            removeSpaceship(*x,*y,fp);
             //movementLaser(lasers);
-            --(ship->posX);
+            --(*x);
             break;
-            /*case 's':
-                removeSpaceship(*x,*y,fp);
-                ++(*y);
-                break;*/
         case 'd':
-            removeSpaceship(ship);
+            removeSpaceship(*x,*y,fp);
             //movementLaser(lasers);
-            ++(ship->posX);
+            ++(*x);
             break;
         case 'p':
             return EXIT_FAILURE;
         case ' ':
-            createLaser(ship->posX, ship->posY, lasers);
+            createLaser(*x, *y, lasers);
             break;
             /*default:
                 return EXIT_SUCCESS;*/
     }
 
-    printSpaceship(ship);
+    printSpaceship(*x,*y,fp);
     return EXIT_SUCCESS;
 }
 
@@ -81,7 +73,7 @@ void movementLaser(Laser *lasers){
 }
 
 void createStar(Star *stars){
-    for(int i = 0; i < 25; i++){
+    for(int i = 0; i<50; i++){
         if(stars[i].maj == 0){
             stars[i].posX = rand()%(50-2+1);
             stars[i].posY = rand()%(50-1);
@@ -92,7 +84,7 @@ void createStar(Star *stars){
 }
 
 void movementStar(Star *stars){
-    for(int i = 0; i<25; i++){
+    for(int i = 0; i<50; i++){
         if(stars[i].maj == 1){
             if(stars[i].posX == 120){
                 removeStar(stars[i].posX, stars[i].posY );
@@ -119,8 +111,10 @@ void removeStar(int x,int y){
     printf("\n");
 }
 
-void printVoid(){
-    for (int i = 0; i < 75; ++i) {
-        printf("                                                                                                                                                          ");
+void printBoard(){
+    for (int i=0; i<150; i++){
+        for (int y=0; y<70; y++){
+            printf("1");
+        }
     }
 }
