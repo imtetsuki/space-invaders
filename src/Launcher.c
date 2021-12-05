@@ -14,25 +14,31 @@
 #include "../headers/Reglage.h"
 #include "../headers/Launcher.h"
 
-int main(){
+void launch(){
+
     initscr();
     curs_set(0);
-    int out = 0;
-    //int x = 50;
-    //int y = 40;
 
-    Laser* lasers = malloc(200* sizeof *lasers);
-    Star* stars = malloc(200* sizeof *stars);
+    Laser* lasers = malloc(20* sizeof *lasers);
+    Star* stars = malloc(25* sizeof *stars);
 
 
     FILE *spaceship = fopen("Assets/spaceship.txt", "r");
     Spaceship *spaceship1 = createJoueur(50,40,spaceship);
-    //FILE *alien = fopen("Assets/ennemi1_sud.txt", "r");
+
+    FILE *alien = fopen("Assets/ennemi1_sud.txt", "r");
+    Alien *alien1 = initAlien(10,10,1, fileToCharArr(alien));
+    addlist(alien1);
+    addlist(alien1);
+    addlist(alien1);
+    addlist(alien1);
+
     createStar(stars);
 
     int sec = 0;
+    int out = 0;
     while ( out == 0){
-        out = movement(spaceship1, lasers);
+        movement(spaceship1, lasers);
         if(sec == 1500) {
             movementLaser(lasers);
             sec = 0;
@@ -40,13 +46,15 @@ int main(){
             movementStar(stars);
         }
         sec++;
+        collide(alien1, lasers);
         printSpaceship(spaceship1);
-        //createEnnemie(aliens,alien);
-        //sleep(1);
+        printAlien(alien1);
     }
 
-    fclose(spaceship);
-    //fclose(alien);
+}
+
+int main(){
+    launch();
     return 0;
 
 }

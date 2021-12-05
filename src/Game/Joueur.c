@@ -39,13 +39,15 @@ char* fileToCharArr(FILE *fp){
     rewind(fp);
 
 /* Allocate the buffer (no need to initialize it with calloc) */
-    buffer = malloc((size + 1) * sizeof(*buffer)); /* size + 1 byte for the \0 */
+    buffer = (char *)malloc((size + 1) * sizeof(*buffer)); /* size + 1 byte for the \0 */
 
 /* Read the file into the buffer */
     fread(buffer, size, 1, fp); /* Read 1 chunk of size bytes from fp into buffer */
 
 /* NULL-terminate the buffer */
     buffer[size] = '\0';
+
+    fclose(fp);
 
 /* Print it ! */
     return buffer;
@@ -90,7 +92,7 @@ void printLaser(int x, int y){
 }
 
 void createLaser(int x, int y, Laser *lasers){
-    for(int i = 0; i < 25; i++){
+    for(int i = 0; i < 20; i++){
         if(lasers[i].maj == 0){
             //lasers[i] = {x+3, --y, 1, 't', 1};
             lasers[i].posX = x+6;

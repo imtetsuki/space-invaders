@@ -33,19 +33,11 @@ char key_pressed()
 int movement(Spaceship *ship, Laser lasers[]){
     char key = key_pressed();
     switch (key) {
-        /*case 'z':
-            removeSpaceship(*x,*y,fp);
-            --(*y);
-            break;*/
         case 'q':
             removeSpaceship(ship);
             //movementLaser(lasers);
             --(ship->posX);
             break;
-            /*case 's':
-                removeSpaceship(*x,*y,fp);
-                ++(*y);
-                break;*/
         case 'd':
             removeSpaceship(ship);
             //movementLaser(lasers);
@@ -66,7 +58,7 @@ int movement(Spaceship *ship, Laser lasers[]){
 
 
 void movementLaser(Laser *lasers){
-    for(int i = 0; i<25; i++){
+    for(int i = 0; i<20; i++){
         if(lasers[i].maj == 1){
             if(lasers[i].posY == 0){
                 removeLaser(lasers[i].posX, lasers[i].posY );
@@ -83,7 +75,7 @@ void movementLaser(Laser *lasers){
 void createStar(Star *stars){
     for(int i = 0; i < 25; i++){
         if(stars[i].maj == 0){
-            stars[i].posX = rand()%(50-2+1);
+            stars[i].posX = rand()%(100-2+1);
             stars[i].posY = rand()%(50-1);
             stars[i].maj = 1;
             printStar(stars[i].posX, stars[i].posY);
@@ -117,4 +109,31 @@ void removeStar(int x,int y){
     printf("\033[%d;%dH",y,x);
     printf("%s","  ");
     printf("\n");
+}
+
+int count(struct Alien* head){
+    int i = 0;
+    while(head != NULL){
+        i++;
+        head = head->nxt;
+    }
+    return i;
+}
+
+void collide(struct Alien* head, Laser *lasers){
+    struct Alien* courant = head;
+    for(int i = 0; i<25; i++){
+        while(courant != NULL){
+            if(lasers[i].posY == courant->posY+2 && lasers[i].posX > courant->posX && lasers[i].posX < courant->posX+8){
+                courant->vie--;
+                lasers[i].maj = 0;
+                //printf("HITHITHITIHTHITHIHTIHI");
+                if(courant->vie <= 0){
+                    removeAlien(courant);
+                    retire(head,courant);
+                }
+            }
+            courant = courant->nxt;
+        }
+    }
 }

@@ -30,9 +30,9 @@ struct Alien* initAlien(int posX, int posY, int vie, char* carrosserie){
 void addlist(struct Alien* head){
     struct Alien* courant = head;
     while(courant->nxt != NULL){
-        courant = (Alien *) courant->nxt;
+        courant = courant->nxt;
     }
-    struct Alien* init = initAlien(head->posX+10, head->posY,head->vie, head->carroserie);
+    struct Alien* init = initAlien(courant->posX+10, courant->posY,courant->vie, courant->carroserie);
     courant -> nxt = init;
 }
 
@@ -42,4 +42,47 @@ void addlistALien(struct Alien* head,struct Alien* next){
         courant = (Alien *) courant->nxt;
     }
     courant->nxt = next;
+}
+
+void printAlien(struct Alien* head){
+    struct Alien* courant = head;
+    int y;
+    while(courant != NULL){
+        y = courant->posY;
+        if(courant->vie > 0){
+            printf("\033[%d;%dH",y,courant->posX);
+            for(int i = 0; i< strlen(courant->carroserie);i++){
+                if(courant->carroserie[i] == '\n'){
+                    printf("\033[%d;%dH",y,courant->posX);
+                    y++;
+                }
+                printf("%c", courant->carroserie[i]);
+            }
+        }
+        courant = courant->nxt;
+    }
+
+}
+
+void retire(struct Alien* head, struct Alien* retire){
+    struct Alien* courant = head;
+    while(courant != NULL && courant->nxt != retire){
+        courant = courant ->nxt;
+    }
+    if(courant != NULL){
+        struct Alien* tmp = courant->nxt;
+        courant->nxt = courant->nxt-> nxt;
+        free(tmp);
+    }
+}
+
+void removeAlien(struct Alien* courant){
+    int y = courant->posY;
+    printf("\033[%d;%dH",y,courant->posX);
+    for(int i = 0; i< 3;i++){
+        printf("\033[%d;%dH",y,courant->posX);
+        y++;
+        printf("%s", "        ");
+    }
+
 }

@@ -27,8 +27,6 @@ typedef struct Laser{
     int posX;
     int posY;
     int vitesse;
-    char carroserie[35];
-    char couleur[30];
     int maj; //maj == 1, laser existe, maj == 0 existe plus
 }Laser;
 
