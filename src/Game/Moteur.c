@@ -14,23 +14,27 @@
 #include "../../headers/Reglage.h"
 #include "../../headers/Launcher.h"
 
-char key_pressed()
-{
+char key_pressed() {
     struct termios oldterm, newterm;
-    int oldfd; char c, result = 0;
-    tcgetattr (STDIN_FILENO, &oldterm);
-    newterm = oldterm; newterm.c_lflag &= ~(ICANON | ECHO);
-    tcsetattr (STDIN_FILENO, TCSANOW, &newterm);
+    int oldfd;
+    char c, result = 0;
+    tcgetattr(STDIN_FILENO, &oldterm);
+    newterm = oldterm;
+    newterm.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newterm);
     oldfd = fcntl(STDIN_FILENO, F_GETFL, 0);
-    fcntl (STDIN_FILENO, F_SETFL, oldfd | O_NONBLOCK);
+    fcntl(STDIN_FILENO, F_SETFL, oldfd | O_NONBLOCK);
     c = getchar();
-    tcsetattr (STDIN_FILENO, TCSANOW, &oldterm);
-    fcntl (STDIN_FILENO, F_SETFL, oldfd);
-    if (c != EOF) {ungetc(c, stdin); result = getchar();}
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldterm);
+    fcntl(STDIN_FILENO, F_SETFL, oldfd);
+    if (c != EOF) {
+        ungetc(c, stdin);
+        result = getchar();
+    }
     return result;
 }
 
-int movement(Spaceship *ship, Laser lasers[]){
+int movement(Spaceship *ship, Laser lasers[]) {
     char key = key_pressed();
     switch (key) {
         case 'q':
@@ -57,83 +61,87 @@ int movement(Spaceship *ship, Laser lasers[]){
 }
 
 
-void movementLaser(Laser *lasers){
-    for(int i = 0; i<20; i++){
-        if(lasers[i].maj == 1){
-            if(lasers[i].posY == 0){
-                removeLaser(lasers[i].posX, lasers[i].posY );
+void movementLaser(Laser *lasers) {
+    for (int i = 0; i < 20; i++) {
+        if (lasers[i].maj == 1) {
+            if (lasers[i].posY == 0) {
+                removeLaser(lasers[i].posX, lasers[i].posY);
                 lasers[i].maj = 0;
-            }else{
-                removeLaser(lasers[i].posX, lasers[i].posY );
+            } else {
+                removeLaser(lasers[i].posX, lasers[i].posY);
                 lasers[i].posY = lasers[i].posY - 1;
-                printLaser(lasers[i].posX,lasers[i].posY);
+                printLaser(lasers[i].posX, lasers[i].posY);
             }
         }
     }
 }
 
-void createStar(Star *stars){
-    for(int i = 0; i < 25; i++){
-        if(stars[i].maj == 0){
-            stars[i].posX = rand()%(100-2+1);
-            stars[i].posY = rand()%(50-1);
+void createStar(Star *stars) {
+    for (int i = 0; i < 25; i++) {
+        if (stars[i].maj == 0) {
+            stars[i].posX = rand() % (100 - 2 + 1);
+            stars[i].posY = rand() % (50 - 1);
             stars[i].maj = 1;
             printStar(stars[i].posX, stars[i].posY);
         }
     }
 }
 
-void movementStar(Star *stars){
-    for(int i = 0; i<25; i++){
-        if(stars[i].maj == 1){
-            if(stars[i].posX == 120){
-                removeStar(stars[i].posX, stars[i].posY );
+void movementStar(Star *stars) {
+    for (int i = 0; i < 25; i++) {
+        if (stars[i].maj == 1) {
+            if (stars[i].posX == 120) {
+                removeStar(stars[i].posX, stars[i].posY);
                 stars[i].maj = 0;
                 createStar(stars);
-            }else{
-                removeStar(stars[i].posX, stars[i].posY );
+            } else {
+                removeStar(stars[i].posX, stars[i].posY);
                 stars[i].posX = stars[i].posX + 1;
-                printStar(stars[i].posX,stars[i].posY);
+                printStar(stars[i].posX, stars[i].posY);
             }
         }
     }
 }
 
-void printStar(int x, int y){
-    printf("\033[%d;%dH",y,x);
+void printStar(int x, int y) {
+    printf("\033[%d;%dH", y, x);
     printf("*");
     printf("\n");
 }
 
-void removeStar(int x,int y){
-    printf("\033[%d;%dH",y,x);
-    printf("%s","  ");
+void removeStar(int x, int y) {
+    printf("\033[%d;%dH", y, x);
+    printf("%s", "  ");
     printf("\n");
 }
 
-int count(struct Alien* head){
+int count(struct Alien *head) {
     int i = 0;
-    while(head != NULL){
+    while (head != NULL) {
         i++;
         head = head->nxt;
     }
     return i;
 }
 
-void collide(struct Alien* head, Laser *lasers){
-    struct Alien* courant = head;
-    for(int i = 0; i<25; i++){
-        while(courant != NULL){
-            if(lasers[i].posY == courant->posY+2 && lasers[i].posX > courant->posX && lasers[i].posX < courant->posX+8){
-                courant->vie--;
-                lasers[i].maj = 0;
-                //printf("HITHITHITIHTHITHIHTIHI");
-                if(courant->vie <= 0){
-                    removeAlien(courant);
-                    retire(head,courant);
+void collide(struct Alien *head, Laser *lasers) {
+    struct Alien *courant = head;
+    for (int i = 0; i < 25; i++) {
+        if(lasers[i].maj == 1){
+            while (courant != NULL) {
+                if (lasers[i].posY == courant->posY + 2 && lasers[i].posX > courant->posX && lasers[i].posX < courant->posX + 8) {
+                    courant->vie--;
+                    lasers[i].maj = 0;
+                    //printf("HITHITHITIHTHITHIHTIHI");
+                    if (courant->vie <= 0) {
+                        removeAlien(courant);
+                        retire(head, courant);
+                    }
+                    break;
                 }
+                courant = courant->nxt;
             }
-            courant = courant->nxt;
         }
+
     }
 }

@@ -14,20 +14,20 @@
 #include "../../headers/Reglage.h"
 #include "../../headers/Launcher.h"
 
-Spaceship* createJoueur(int x, int y, FILE *fp){
+Spaceship *createJoueur(int x, int y, FILE *fp) {
     Spaceship *spaceship;
 
-    spaceship = (Spaceship*)malloc(sizeof(Spaceship));
-    spaceship -> posX = x;
-    spaceship -> posY = y;
-    spaceship -> vie = 10;
-    spaceship -> etat = 1;
-    spaceship -> carrosserie = fileToCharArr(fp);
+    spaceship = (Spaceship *) malloc(sizeof(Spaceship));
+    spaceship->posX = x;
+    spaceship->posY = y;
+    spaceship->vie = 10;
+    spaceship->etat = 1;
+    spaceship->carrosserie = fileToCharArr(fp);
 
     return spaceship;
 }
 
-char* fileToCharArr(FILE *fp){
+char *fileToCharArr(FILE *fp) {
     char *buffer = NULL;
     size_t size = 0;
 
@@ -39,7 +39,7 @@ char* fileToCharArr(FILE *fp){
     rewind(fp);
 
 /* Allocate the buffer (no need to initialize it with calloc) */
-    buffer = (char *)malloc((size + 1) * sizeof(*buffer)); /* size + 1 byte for the \0 */
+    buffer = (char *) malloc((size + 1) * sizeof(*buffer)); /* size + 1 byte for the \0 */
 
 /* Read the file into the buffer */
     fread(buffer, size, 1, fp); /* Read 1 chunk of size bytes from fp into buffer */
@@ -53,49 +53,49 @@ char* fileToCharArr(FILE *fp){
     return buffer;
 }
 
-void printSpaceship(Spaceship* ship){
+void printSpaceship(Spaceship *ship) {
     //system("clear");
     //printf("\033[%d;%dH",ship->posY,ship->posX);
     //printf("%s",ship->Carrosserie);
     int y = ship->posY;
-    printf("\033[%d;%dH",y,ship->posX);
-    for(int i = 0; i< strlen(ship->carrosserie);i++){
-        if(ship->carrosserie[i] == '\n'){
-            printf("\033[%d;%dH",y,ship->posX);
+    printf("\033[%d;%dH", y, ship->posX);
+    for (int i = 0; i < strlen(ship->carrosserie); i++) {
+        if (ship->carrosserie[i] == '\n') {
+            printf("\033[%d;%dH", y, ship->posX);
             y++;
         }
-            printf("%c", ship->carrosserie[i]);
+        printf("%c", ship->carrosserie[i]);
     }
 
 }
 
-void removeSpaceship(Spaceship* ship){
+void removeSpaceship(Spaceship *ship) {
     int y = ship->posY;
-    printf("\033[%d;%dH",y,ship->posX);
-    for(int i = 0; i< 11;i++){
-        printf("\033[%d;%dH",y,ship->posX);
+    printf("\033[%d;%dH", y, ship->posX);
+    for (int i = 0; i < 11; i++) {
+        printf("\033[%d;%dH", y, ship->posX);
         y++;
         printf("%s", "                       ");
     }
 }
 
-void removeLaser(int x,int y){
-    printf("\033[%d;%dH",y,x);
-    printf("%s","  ");
+void removeLaser(int x, int y) {
+    printf("\033[%d;%dH", y, x);
+    printf("%s", "  ");
     printf("\n");
 }
 
-void printLaser(int x, int y){
-    printf("\033[%d;%dH",y,x);
+void printLaser(int x, int y) {
+    printf("\033[%d;%dH", y, x);
     printf("||");
     printf("\n");
 }
 
-void createLaser(int x, int y, Laser *lasers){
-    for(int i = 0; i < 20; i++){
-        if(lasers[i].maj == 0){
+void createLaser(int x, int y, Laser *lasers) {
+    for (int i = 0; i < 20; i++) {
+        if (lasers[i].maj == 0) {
             //lasers[i] = {x+3, --y, 1, 't', 1};
-            lasers[i].posX = x+6;
+            lasers[i].posX = x + 6;
             lasers[i].posY = --y;
             //lasers[i].vitesse = 1;
             lasers[i].maj = 1;

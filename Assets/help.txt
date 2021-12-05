@@ -1,0 +1,51 @@
+ ______________________________________________________________________________________________________________________________________________________
+|                                                                                                                                                      |
+|                                                                                                                                                      |
+|                                                                                                                                                      |
+|                         8888888b.                    888                            888                 d8b                                          |
+|                         888   Y88b                   888                            888                 Y8P                                          |
+|                         888    888                   888                            888                                                              |
+|                         888   d88P  .d88b.   .d88b.  888  .d88b.  .d8888b       .d88888 888  888       8888  .d88b.  888  888                        |
+|                         8888888P"  d8P  Y8b d88P"88b 888 d8P  Y8b 88K          d88" 888 888  888       "888 d8P  Y8b 888  888                        |
+|                         888 T88b   88888888 888  888 888 88888888 "Y8888b.     888  888 888  888        888 88888888 888  888                        |
+|                         888  T88b  Y8b.     Y88b 888 888 Y8b.          X88     Y88b 888 Y88b 888        888 Y8b.     Y88b 888                        |
+|                         888   T88b  "Y8888   "Y88888 888  "Y8888   88888P'      "Y88888  "Y88888        888  "Y8888   "Y88888                        |
+|                                                 888                                                    888                                           |
+|                                          Y8b d88P                                                   d88P                                             |
+|                                           "Y88P"                                                  888P"                                              |
+|                                                                                                                                                      |
+|                                                                                                                                                      |
+|                                                Tuez tous les vaisseaux ennemies avant qu'il ne vous tue.                                             |
+|                                                     Les vaisseaux de couleur blanc valent 1 point.                                                   |
+|                                                      Les vaisseaux de couleur     valent 2 point.                                                    |
+|                                                      Les vaisseaux de couleur     valent 3 point.                                                    |
+|                                                      Les vaisseaux de couleur     valent 4 point.                                                    |
+|                                                                                                                                                      |
+|                                                                                                                                                      |
+|                                                        Appuyer sur M pour revenir sur le MENU.                                                       |
+|                                                                                                                                                      |
+|                                                                                                                                                      |
+|                                                                          .::::-                                                                      |
+|                                                                          /mmmmo                                                                      |
+|                                                                          /NNNNs                                                                      |
+|                                                                     -hhhhdNNNNdhhhh/                                                                 |
+|                                                                     :NNNNmhhhhdNNNN+                                                                 |
+|                                                                     :NNNNy````+NNNN+                                                                 |
+|                                                                     :NNNNy    +NNNN+                                                                 |
+|                                                                     :NNNNy    +NNNN+                                                                 |
+|                                                                     :NNNNy    +NNNN+                                                                 |
+|                                                           `....`    :NNNNy....+NNNm+``  `....`                                                       |
+|                                                          ``mNNNd``  :NNNNNNNNNNNmNm+````+NNNN+                                                       |
+|                                                         ```mmmmh````:mmmmmmmNmmmmmmo````+mmmm+                                                       |
+|                                                       ooooommmNdoooosmmmNmmmmmNNmmmyoooohmmmmyoooo-                                                  |
+|                                                       mNNNNNNNNNNNNNNNNNNNNNNNNNNNNdNNNNNNNNNNNNNN/                                                  |
+|                                                       mNNNNNNNNNNNNNNNNNNNNNNNNNNNNdNNNNNNNNNNNNNN/                                                  |
+|                                                       mNNNNNNNNNNNNNNNNNNNNNNNNNNNNdNNNNNNNNNNNNNN/                                                  |
+|                                                       mNNNNNNNNNNNNNNNNNNNNNNNNNNNNdNNNNNNNNNNNNNN/                                                  |
+|                                                       mNNNNNNNNmooooyNNNNNNNNNNNNNNyoooohNNNNNNNNN/                                                  |
+|                                                       mNNNNNNNNd    :NNNNNNNNNNNNNN+    +NNNNNNNNN/                                                  |
+|                                                       dmmmmmmmmh    -mmmmmNNNNmmmmm+    +mmmmmmmmm:                                                  |
+|                                                       ---------.    `----+NNNNy----.    .---------`                                                  |
+|                                                                          /NNNNs                                                                      |
+|                                                                          -ssss/                                                                      |
+|______________________________________________________________________________________________________________________________________________________|

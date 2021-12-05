@@ -1,7 +1,3 @@
-//
-// Created by PHAM Hoang-Lân on 03/12/2021.
-//
-
 #ifndef SPACE_INVADERS_JOUEUR_H
 #define SPACE_INVADERS_JOUEUR_H
 

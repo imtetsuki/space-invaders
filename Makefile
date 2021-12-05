@@ -7,23 +7,22 @@ LDFLAGS =
 RM = rm -f
 LDLIBS =s
 
-#Les .o faut les lister ici
-OBJS =  Moteur.o Joueur.o Ennemie.o  launcher.o
+OBJS =  Moteur.o Joueur.o Ennemie.o  launcher.o Reglage.o
 
-#le nom de ton executable
 PROG = Space_Invaders
 
 all: $(PROG)
 
-#le gcc final faut rajouter les flag de compil ici genre -lm pour le math.h
 $(PROG): $(OBJS)
 	$(LD) $(LDFLAGS) $(OBJS) -o $(PROG) -lncurses
 	make clean
 
-#tu mets le .c + les fichier .h inclu dedans
 
 Moteur.o: src/Game/Moteur.c #headers/spaceship.h
 	$(CC) $(CFLAGS) -c src/Game/Moteur.c
+
+Reglage.o: src/Menu/Reglage.c #headers/spaceship.h
+	$(CC) $(CFLAGS) -c src/Menu/Reglage.c
 
 launcher.o: src/launcher.c #headers/spaceship.h
 	$(CC) $(CFLAGS) -c src/launcher.c
