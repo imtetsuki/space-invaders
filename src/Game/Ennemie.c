@@ -15,7 +15,7 @@
 #include "../../headers/Reglage.h"
 #include "../../headers/Launcher.h"
 
-struct Alien *initAlien(int posX, int posY, int vie, char *carrosserie) {
+struct Alien *initAlien(int posX, int posY, int vie, char *carrosserie) { //Initialiser un alien directement dans la linked list
     struct Alien *alien = malloc(sizeof(Alien));
     alien->posX = posX;
     alien->posY = posY;
@@ -27,7 +27,7 @@ struct Alien *initAlien(int posX, int posY, int vie, char *carrosserie) {
     return alien;
 }
 
-void addlist(struct Alien *head) {
+void addlist(struct Alien *head) { //Ajout semi-automatique d'un alien lambda dans la linked list a la fin
     struct Alien *courant = head;
     int cpt = 0;
     int ligne = 0;
@@ -51,7 +51,7 @@ void addlist(struct Alien *head) {
 
 }
 
-void addlistALien(struct Alien *head, struct Alien *next) {
+void addlistALien(struct Alien *head, struct Alien *next) { //AJout d'un alien specifique dans la linked list a la fin
     struct Alien *courant = head;
     while (courant->nxt != NULL) {
         courant = (Alien *) courant->nxt;
@@ -59,7 +59,7 @@ void addlistALien(struct Alien *head, struct Alien *next) {
     courant->nxt = next;
 }
 
-void printAlien(struct Alien *head) {
+void printAlien(struct Alien *head) { //Afficher tout les aliens a leur positions x et y de leur structure
     struct Alien *courant = head;
     int y;
     while (courant != NULL) {
@@ -79,7 +79,7 @@ void printAlien(struct Alien *head) {
 
 }
 
-void retire(struct Alien *head, struct Alien *retire) {
+void retire(struct Alien *head, struct Alien *retire) { //Retirer un alien de la linked list
     struct Alien *courant = head;
     while (courant != NULL && courant->nxt != retire) {
         courant = courant->nxt;
@@ -91,7 +91,7 @@ void retire(struct Alien *head, struct Alien *retire) {
     }
 }
 
-void removeAlien(struct Alien *courant) {
+void removeAlien(struct Alien *courant) { //Retirer l'affichage de l'alien x a la position x et y en printant par dessus des espaces vides
     int y = courant->posY;
     printf("\033[%d;%dH", y, courant->posX);
     for (int i = 0; i < 3; i++) {
@@ -102,7 +102,7 @@ void removeAlien(struct Alien *courant) {
 }
 
 
-void mouvementAlien(struct Alien *head, int x, int y) {
+void mouvementAlien(struct Alien *head, int x, int y) { //Update le mouvement de l'allien en fonction de variable x et y
     struct Alien *courant = head;
 
     while (courant != NULL) {

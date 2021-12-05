@@ -14,7 +14,7 @@
 #include "../../headers/Reglage.h"
 #include "../../headers/Launcher.h"
 
-char key_pressed() {
+char key_pressed() { //Pour recuperer l'entree des touches de l'utilisateur
     struct termios oldterm, newterm;
     int oldfd;
     char c, result = 0;
@@ -34,7 +34,7 @@ char key_pressed() {
     return result;
 }
 
-int movement(Spaceship *ship, Laser lasers[]) {
+int movement(Spaceship *ship, Laser lasers[]) { //Faire bouger le vaisseau allie et effectuer des tirs
     char key = key_pressed();
     switch (key) {
         case 'q':
@@ -54,6 +54,8 @@ int movement(Spaceship *ship, Laser lasers[]) {
             break;
             /*default:
                 return EXIT_SUCCESS;*/
+        case 'l':
+            return 1;
     }
 
     printSpaceship(ship);
@@ -61,7 +63,7 @@ int movement(Spaceship *ship, Laser lasers[]) {
 }
 
 
-void movementLaser(Laser *lasers) {
+void movementLaser(Laser *lasers) { //Actualisation des lasers a chaque instant x
     for (int i = 0; i < 20; i++) {
         if (lasers[i].maj == 1) {
             if (lasers[i].posY == 0) {
@@ -76,7 +78,7 @@ void movementLaser(Laser *lasers) {
     }
 }
 
-void createStar(Star *stars) {
+void createStar(Star *stars) { //Initialisation des etoiles a des coordoones aleatoire entre un min et max pour x et y
     for (int i = 0; i < 25; i++) {
         if (stars[i].maj == 0) {
             stars[i].posX = rand() % (100 - 2 + 1);
@@ -87,7 +89,7 @@ void createStar(Star *stars) {
     }
 }
 
-void movementStar(Star *stars) {
+void movementStar(Star *stars) { //Actualisation des etoiles pour les faires bouger de gauche a droite mais on aurait pu les faire bouger de haut en bas
     for (int i = 0; i < 25; i++) {
         if (stars[i].maj == 1) {
             if (stars[i].posX == 120) {
@@ -103,19 +105,19 @@ void movementStar(Star *stars) {
     }
 }
 
-void printStar(int x, int y) {
+void printStar(int x, int y) { //Affichage des etoiles sur le terminal
     printf("\033[%d;%dH", y, x);
     printf("*");
     printf("\n");
 }
 
-void removeStar(int x, int y) {
+void removeStar(int x, int y) { //Retirer l'afficahge des etoiles sur le terminal
     printf("\033[%d;%dH", y, x);
     printf("%s", "  ");
     printf("\n");
 }
 
-int count(struct Alien *head) {
+int count(struct Alien *head) { //Pour compter la taille de la linkedlist
     int i = 0;
     while (head != NULL) {
         i++;
@@ -124,12 +126,14 @@ int count(struct Alien *head) {
     return i;
 }
 
-void collide(struct Alien *head, Laser *lasers) {
+void collide(struct Alien *head, Laser *lasers) { // fonction pour la collision des lasers sur l'ennemie on regarde la ligne horizontal de devant l'ennemie mais on aurait pu faire une hitbox carree entre du coup 4 conditions
+    // et des intervalles x et y pour faire en sorte que ca soit un carre
     struct Alien *courant = head;
     for (int i = 0; i < 25; i++) {
-        if(lasers[i].maj == 1){
+        if (lasers[i].maj == 1) {
             while (courant != NULL) {
-                if (lasers[i].posY == courant->posY + 2 && lasers[i].posX > courant->posX && lasers[i].posX < courant->posX + 8) {
+                if (lasers[i].posY == courant->posY + 2 && lasers[i].posX > courant->posX &&
+                    lasers[i].posX < courant->posX + 8) {
                     courant->vie--;
                     lasers[i].maj = 0;
                     //printf("HITHITHITIHTHITHIHTIHI");
@@ -144,4 +148,24 @@ void collide(struct Alien *head, Laser *lasers) {
         }
 
     }
+}
+
+int status(struct Alien *head,struct Spaceship *spaceship){ //Verification de l'etat du jeu 1 pour gagner 2 pour continuer le jeu 0 pour lose
+
+    struct Alien * courant = head;
+
+    if (courant == NULL){
+        return 1;
+    }
+
+    while (courant->nxt != NULL){
+        courant = courant->nxt;
+    }
+
+    if(courant->posY >= spaceship->posY){
+        return 0;
+    }
+
+    return 2;
+
 }

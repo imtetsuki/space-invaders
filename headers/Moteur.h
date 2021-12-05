@@ -10,5 +10,6 @@ void printStar(int x, int y);
 void removeStar(int x,int y);
 int count(struct Alien* head);
 void collide(struct Alien* head, Laser *lasers);
+int status(struct Alien *head,struct Spaceship *spaceship);
 
 #endif //SPACE_INVADERS_MOTEUR_H

@@ -14,32 +14,20 @@
 #include "../../headers/Reglage.h"
 #include "../../headers/Launcher.h"
 
-void printFile(FILE *fp) {
+void printFile(FILE *fp) { //pour print directement le fichier
     char *buffer = NULL;
     size_t size = 0;
-
-/* Get the buffer size */
-    fseek(fp, 0, SEEK_END); /* Go to end of file */
-    size = ftell(fp); /* How many bytes did we pass ? */
-
-/* Set position of stream to the beginning */
+    fseek(fp, 0, SEEK_END);
+    size = ftell(fp);
     rewind(fp);
-
-/* Allocate the buffer (no need to initialize it with calloc) */
-    buffer = (char *) malloc((size + 1) * sizeof(*buffer)); /* size + 1 byte for the \0 */
-
-/* Read the file into the buffer */
-    fread(buffer, size, 1, fp); /* Read 1 chunk of size bytes from fp into buffer */
-
-/* NULL-terminate the buffer */
+    buffer = (char *) malloc((size + 1) * sizeof(*buffer));
+    fread(buffer, size, 1, fp);
     buffer[size] = '\0';
     printf("\033[34m %s", buffer);
     fclose(fp);
-
-/* Print it ! */
 }
 
-void selectMenu(int i) {// afficher 1
+void selectMenu(int i) {// afficher 1e menu ou la page help
     curs_set(0);
     printf("\033[%d;%dH", 0, 0);
     clear();
@@ -52,7 +40,7 @@ void selectMenu(int i) {// afficher 1
     }
 }
 
-int choiceMenu() {
+int choiceMenu() { //Faire le choix d'affichage au debut
     char key = key_pressed();
     switch (key) {
         case 'p':

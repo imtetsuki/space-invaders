@@ -14,7 +14,7 @@
 #include "../../headers/Reglage.h"
 #include "../../headers/Launcher.h"
 
-Spaceship *createJoueur(int x, int y, FILE *fp) {
+Spaceship *createJoueur(int x, int y, FILE *fp) { //Initialiser et allouer de l'espace pour un joueur
     Spaceship *spaceship;
 
     spaceship = (Spaceship *) malloc(sizeof(Spaceship));
@@ -27,33 +27,32 @@ Spaceship *createJoueur(int x, int y, FILE *fp) {
     return spaceship;
 }
 
-char *fileToCharArr(FILE *fp) {
+char *fileToCharArr(FILE *fp) { //Ajout d'un file dans tableau dynamique de char
     char *buffer = NULL;
     size_t size = 0;
 
-/* Get the buffer size */
-    fseek(fp, 0, SEEK_END); /* Go to end of file */
-    size = ftell(fp); /* How many bytes did we pass ? */
+/* Avoir la taille du buffer */
+    fseek(fp, 0, SEEK_END);
+    size = ftell(fp);
 
-/* Set position of stream to the beginning */
+/* Mettre le pointeur au debut */
     rewind(fp);
 
-/* Allocate the buffer (no need to initialize it with calloc) */
+/* Allocation de memoire */
     buffer = (char *) malloc((size + 1) * sizeof(*buffer)); /* size + 1 byte for the \0 */
 
-/* Read the file into the buffer */
+/* Lire le fichier ligne par ligne et rajout dans le buffer */
     fread(buffer, size, 1, fp); /* Read 1 chunk of size bytes from fp into buffer */
 
-/* NULL-terminate the buffer */
+/* Si c'est la fin ca fini le buffer*/
     buffer[size] = '\0';
 
     fclose(fp);
 
-/* Print it ! */
     return buffer;
 }
 
-void printSpaceship(Spaceship *ship) {
+void printSpaceship(Spaceship *ship) { //Affichage du vaisseau alliee
     //system("clear");
     //printf("\033[%d;%dH",ship->posY,ship->posX);
     //printf("%s",ship->Carrosserie);
@@ -69,7 +68,7 @@ void printSpaceship(Spaceship *ship) {
 
 }
 
-void removeSpaceship(Spaceship *ship) {
+void removeSpaceship(Spaceship *ship) { //Enlever l'affichage du vaisseau alliee en printant par dessus des espaces vides
     int y = ship->posY;
     printf("\033[%d;%dH", y, ship->posX);
     for (int i = 0; i < 11; i++) {
@@ -79,19 +78,19 @@ void removeSpaceship(Spaceship *ship) {
     }
 }
 
-void removeLaser(int x, int y) {
+void removeLaser(int x, int y) { //Enlever l'affichage du laser en printant par dessus des espaces vides
     printf("\033[%d;%dH", y, x);
     printf("%s", "  ");
     printf("\n");
 }
 
-void printLaser(int x, int y) {
+void printLaser(int x, int y) { //Affichage du laser
     printf("\033[%d;%dH", y, x);
     printf("||");
     printf("\n");
 }
 
-void createLaser(int x, int y, Laser *lasers) {
+void createLaser(int x, int y, Laser *lasers) { //Pour creer un laser a chaque appuie avec un break pour creer que un laser par appuie
     for (int i = 0; i < 20; i++) {
         if (lasers[i].maj == 0) {
             //lasers[i] = {x+3, --y, 1, 't', 1};
