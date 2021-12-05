@@ -84,5 +84,12 @@ void removeAlien(struct Alien* courant){
         y++;
         printf("%s", "        ");
     }
+}
 
+void mouvementAlien(struct Alien* head){
+    struct Alien* courant = head;
+    while(courant->nxt != NULL){
+        courant = (Alien *) courant->nxt;
+    }
+    courant->nxt = next;
 }

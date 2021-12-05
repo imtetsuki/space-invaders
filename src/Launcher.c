@@ -38,7 +38,9 @@ void launch(){
     int sec = 0;
     int out = 0;
     while ( out == 0){
+        printAlien(alien1);
         movement(spaceship1, lasers);
+        printSpaceship(spaceship1);
         if(sec == 1500) {
             movementLaser(lasers);
             sec = 0;
@@ -47,8 +49,6 @@ void launch(){
         }
         sec++;
         collide(alien1, lasers);
-        printSpaceship(spaceship1);
-        printAlien(alien1);
     }
 
 }
